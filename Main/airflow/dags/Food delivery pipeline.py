@@ -1,4 +1,3 @@
-
 import os
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
@@ -21,7 +20,7 @@ PG_HOST = os.getenv("PG_HOST", "localhost")
 PG_PORT = int(os.getenv("PG_PORT", "5432"))
 PG_DB = os.getenv("PG_DB", "postgres")
 PG_USER = os.getenv("PG_USER", "postgres")
-PG_PASSWORD = os.getenv("PG_PASSWORD", "Khanh123!")
+PG_PASSWORD = os.getenv("PG_PASSWORD")
 
 SCHEMA = "public"
 TABLE_PREFIX = "bronze_"
@@ -95,11 +94,14 @@ NUM_REGEX = "^[+-]?([0-9]+[.]?[0-9]*|[.][0-9]+)([eE][+-]?[0-9]+)?$"
 
 
 def T(name: str) -> str:
-
     return f'"{SCHEMA}"."{name}"'
 
 
 def get_engine():
+    if PG_PASSWORD is None:
+        raise ValueError(
+            "Chưa đặt biến môi trường PG_PASSWORD (khai báo trong docker-compose.yaml / file .env)."
+        )
 
     url = URL.create(
         drivername="postgresql+psycopg2",
@@ -132,7 +134,6 @@ def run_statements(statements: list) -> None:
                 conn.execute(text(stmt))
     finally:
         engine.dispose()
-
 
 
 def _text_expr(col: str) -> str:
@@ -237,7 +238,6 @@ $$ LANGUAGE plpgsql STABLE
     return stmts
 
 
-
 COMMON_METRICS = """
     COUNT(*) AS total_orders,
     ROUND(SUM(f.order_value_usd), 2) AS total_order_value_usd,
@@ -253,7 +253,6 @@ COMMON_METRICS = """
 
 
 def mart_queries() -> dict:
-    """Tên mart -> câu SELECT, đọc từ fact + dim."""
     fact = T(FACT_TABLE)
     return {
         "mart_city_performance": f"""
@@ -350,11 +349,8 @@ def fact_statements() -> list:
     return stmts
 
 
-
-
 @task(task_id="scan_source_files")
 def scan_source_files() -> list[str]:
-    """Quét thư mục nguồn, trả về danh sách file csv/xlsx cần nhập."""
     folder = Path(DATA_DIR)
     if not folder.is_dir():
         raise FileNotFoundError(f"Không tìm thấy thư mục: {DATA_DIR}")
@@ -363,7 +359,7 @@ def scan_source_files() -> list[str]:
         for p in folder.iterdir()
         if p.is_file()
         and p.suffix.lower() in SUPPORTED_EXT
-        and not p.name.startswith(("~$", "."))  # bỏ file tạm của Excel
+        and not p.name.startswith(("~$", "."))
     )
     if not files:
         raise FileNotFoundError(f"Không có file csv/xlsx nào trong: {DATA_DIR}")
@@ -373,9 +369,8 @@ def scan_source_files() -> list[str]:
 
 @task(task_id="load_file_to_bronze", max_active_tis_per_dag=4)
 def load_file_to_bronze(file_path: str) -> dict:
-    """Nhập một file vào Postgres (mỗi file một task), thêm cột audit."""
     path = Path(file_path)
-    table_name = f"{TABLE_PREFIX}{path.stem}"  # tiền tố + tên file
+    table_name = f"{TABLE_PREFIX}{path.stem}"
 
     df = read_file(path)
     df["_source_file"] = path.name
@@ -383,7 +378,7 @@ def load_file_to_bronze(file_path: str) -> dict:
 
     engine = get_engine()
     try:
-        # Tạo schema nếu chưa có (tránh lỗi: schema "public" does not exist)
+
         with engine.begin() as conn:
             conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{SCHEMA}"'))
         df.to_sql(
@@ -405,7 +400,6 @@ def load_file_to_bronze(file_path: str) -> dict:
 
 @task(task_id="validate_bronze", retries=0)
 def validate_bronze(load_results) -> dict:
-    """Đối chiếu số dòng đã nhập và kiểm tra bảng Bronze có đủ cột cần thiết."""
     results = list(load_results)
     tables = {r["table"]: r["rows"] for r in results}
     if BRONZE_TABLE not in tables:
@@ -431,10 +425,8 @@ def validate_bronze(load_results) -> dict:
     return tables
 
 
-# ---- Silver ----
 @task(task_id="transform_silver_fact_orders")
 def transform_silver() -> dict:
-    """Làm sạch, ép kiểu, khử trùng lặp theo order_id -> silver_fact_orders."""
     engine = get_engine()
     try:
         cols = {c["name"] for c in inspect(engine).get_columns(BRONZE_TABLE, schema=SCHEMA)}
@@ -458,7 +450,6 @@ def transform_silver() -> dict:
 
 @task(task_id="validate_silver", retries=0)
 def validate_silver() -> dict:
-    """Kiểm tra Silver: có dữ liệu, order_id duy nhất, không còn giá trị âm; báo cáo tỉ lệ NULL."""
     neg_cols = sorted(NON_NEGATIVE_COLS)
     null_cols = MONEY_COLS + DECIMAL_COLS + INT_COLS + BOOL_COLS
     select = ["COUNT(*) AS total_rows", "COUNT(DISTINCT order_id) AS distinct_ids",
@@ -494,7 +485,6 @@ def validate_silver() -> dict:
 
 @task(task_id="reset_gold_layer")
 def reset_gold_layer() -> None:
-    """Xóa fact và mart cũ trước khi dựng lại (tránh vướng khóa ngoại khi tạo lại dim)."""
     run_statements(
         [f"DROP TABLE IF EXISTS {T(FACT_TABLE)} CASCADE"]
         + [f"DROP TABLE IF EXISTS {T(m)} CASCADE" for m in MART_NAMES]
@@ -503,7 +493,6 @@ def reset_gold_layer() -> None:
 
 @task(task_id="build_dimension")
 def build_dimension(dim: str) -> dict:
-    """Dựng một bảng dimension từ Silver (các dim chạy song song)."""
     run_statements(dimension_statements(dim))
     engine = get_engine()
     try:
@@ -517,7 +506,6 @@ def build_dimension(dim: str) -> dict:
 
 @task(task_id="build_fact_delivery_orders")
 def build_fact() -> dict:
-    """Dựng bảng fact: thay thuộc tính text bằng khóa dim, thêm PK/FK/index."""
     run_statements(fact_statements())
     engine = get_engine()
     try:
@@ -531,7 +519,6 @@ def build_fact() -> dict:
 
 @task(task_id="build_mart")
 def build_mart(mart: str) -> dict:
-    """Dựng một bảng tổng hợp mart_* từ fact + dim (các mart chạy song song)."""
     run_statements([
         f"DROP TABLE IF EXISTS {T(mart)} CASCADE",
         f"CREATE TABLE {T(mart)} AS {mart_queries()[mart]}",
@@ -548,7 +535,6 @@ def build_mart(mart: str) -> dict:
 
 @task(task_id="validate_gold", retries=0)
 def validate_gold() -> dict:
-    """Đối soát Gold với Silver: số dòng, tổng doanh thu, khóa dim, tổng đơn của các mart."""
     fact, silver = T(FACT_TABLE), T(SILVER_TABLE)
     checks = [
         ("số dòng fact = số dòng silver",
@@ -588,7 +574,6 @@ def validate_gold() -> dict:
 
 @task(task_id="pipeline_summary", retries=0)
 def pipeline_summary() -> dict:
-    """In số dòng của mọi bảng trong pipeline vào log."""
     tables = [BRONZE_TABLE, SILVER_TABLE, FACT_TABLE] + list(DIMENSIONS) + MART_NAMES
     counts = {}
     engine = get_engine()
@@ -618,10 +603,9 @@ default_args = {
 @dag(
     dag_id=DAG_ID,
     description="Medallion: Bronze (csv/xlsx) -> Silver (làm sạch) -> Gold (star schema + mart)",
-    doc_md=__doc__,
     default_args=default_args,
     start_date=datetime(2024, 1, 1),
-    schedule=None,  # chạy thủ công; đổi thành "@daily" nếu muốn chạy định kỳ
+    schedule=None,
     catchup=False,
     max_active_runs=1,
     dagrun_timeout=timedelta(hours=2),
