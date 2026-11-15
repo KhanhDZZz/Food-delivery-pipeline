@@ -1,6 +1,10 @@
 # Food delivery pipeline
+<img width="719" height="427" alt="image" src="https://github.com/user-attachments/assets/4e94264f-1456-445e-9ae4-8ceb02ff6cda" />
+
 Food Delivery Pipeline
 ETL pipeline built with Apache Airflow and PostgreSQL using Medallion Architecture (Bronze → Silver → Gold) to ingest CSV/XLSX food delivery orders, clean data, and build a star schema and data marts.
+
+- Dataset Source: https://www.kaggle.com/datasets/luthfimuthathohirin/global-food-delivery-restaurant-market-2026
 
 # Medallion Architecture (Bronze -> Silver -> Gold)
 <img width="1835" height="1068" alt="image" src="https://github.com/user-attachments/assets/aadf5693-a0de-42da-8ddc-6618f2020086" />
