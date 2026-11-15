@@ -1,0 +1,19 @@
+[2026-11-15T19:32:01.453+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-11-15T19:32:01.480+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: import_files_to_postgres.load_to_postgres manual__2026-11-15T19:31:59.342589+00:00 map_index=0 [queued]>
+[2026-11-15T19:32:01.488+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: import_files_to_postgres.load_to_postgres manual__2026-11-15T19:31:59.342589+00:00 map_index=0 [queued]>
+[2026-11-15T19:32:01.489+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-11-15T19:32:01.500+0000] {taskinstance.py:2330} INFO - Executing <Mapped(_PythonDecoratedOperator): load_to_postgres> on 2026-11-15 19:31:59.342589+00:00
+[2026-11-15T19:32:01.506+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'import_files_to_postgres', 'load_to_postgres', 'manual__2026-11-15T19:31:59.342589+00:00', '--job-id', '63', '--raw', '--subdir', 'DAGS_FOLDER/import_files_to_postgres.py', '--cfg-path', '/tmp/tmpouqbz_tp', '--map-index', '0']
+[2026-11-15T19:32:01.508+0000] {standard_task_runner.py:91} INFO - Job 63: Subtask load_to_postgres
+[2026-11-15T19:32:01.509+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=513) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-11-15T19:32:01.510+0000] {standard_task_runner.py:63} INFO - Started process 515 to run task
+[2026-11-15T19:32:01.544+0000] {task_command.py:426} INFO - Running <TaskInstance: import_files_to_postgres.load_to_postgres manual__2026-11-15T19:31:59.342589+00:00 map_index=0 [running]> on host 26d4a617e9f2
+[2026-11-15T19:32:01.724+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='import_files_to_postgres' AIRFLOW_CTX_TASK_ID='load_to_postgres' AIRFLOW_CTX_EXECUTION_DATE='2026-11-15T19:31:59.342589+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-11-15T19:31:59.342589+00:00'
+[2026-11-15T19:32:01.725+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-11-15T19:32:04.867+0000] {logging_mixin.py:188} INFO - Đã nhập {'file': 'global_food_delivery_enriched_market_2026.csv', 'table': 'bronze_global_food_delivery_enriched_market_2026', 'rows': 8000}
+[2026-11-15T19:32:04.869+0000] {python.py:237} INFO - Done. Returned value was: {'file': 'global_food_delivery_enriched_market_2026.csv', 'table': 'bronze_global_food_delivery_enriched_market_2026', 'rows': 8000}
+[2026-11-15T19:32:04.869+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-11-15T19:32:04.892+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=import_files_to_postgres, task_id=load_to_postgres, run_id=manual__2026-11-15T19:31:59.342589+00:00, map_index=0, execution_date=20261115T193159, start_date=20261115T193201, end_date=20261115T193204
+[2026-11-15T19:32:04.935+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-11-15T19:32:04.946+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-11-15T19:32:04.948+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

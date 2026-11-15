@@ -1,0 +1,172 @@
+[2026-11-15T19:12:42.094+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-11-15T19:12:42.121+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: import_files_to_postgres.load_to_postgres manual__2026-11-15T19:12:40.360998+00:00 map_index=0 [queued]>
+[2026-11-15T19:12:42.128+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: import_files_to_postgres.load_to_postgres manual__2026-11-15T19:12:40.360998+00:00 map_index=0 [queued]>
+[2026-11-15T19:12:42.129+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-11-15T19:12:42.139+0000] {taskinstance.py:2330} INFO - Executing <Mapped(_PythonDecoratedOperator): load_to_postgres> on 2026-11-15 19:12:40.360998+00:00
+[2026-11-15T19:12:42.146+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'import_files_to_postgres', 'load_to_postgres', 'manual__2026-11-15T19:12:40.360998+00:00', '--job-id', '55', '--raw', '--subdir', 'DAGS_FOLDER/import_files_to_postgres.py', '--cfg-path', '/tmp/tmp1wq6aex_', '--map-index', '0']
+[2026-11-15T19:12:42.148+0000] {standard_task_runner.py:91} INFO - Job 55: Subtask load_to_postgres
+[2026-11-15T19:12:42.149+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=225) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-11-15T19:12:42.150+0000] {standard_task_runner.py:63} INFO - Started process 227 to run task
+[2026-11-15T19:12:42.188+0000] {task_command.py:426} INFO - Running <TaskInstance: import_files_to_postgres.load_to_postgres manual__2026-11-15T19:12:40.360998+00:00 map_index=0 [running]> on host fdcf9e025f2f
+[2026-11-15T19:12:42.380+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='import_files_to_postgres' AIRFLOW_CTX_TASK_ID='load_to_postgres' AIRFLOW_CTX_EXECUTION_DATE='2026-11-15T19:12:40.360998+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-11-15T19:12:40.360998+00:00'
+[2026-11-15T19:12:42.381+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-11-15T19:12:42.756+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-11-15T19:12:42.757+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidSchemaName: schema "public" does not exist
+LINE 2: CREATE TABLE public.global_food_delivery_enriched_market_202...
+                     ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 265, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/import_files_to_postgres.py", line 101, in load_to_postgres
+    df.to_sql(
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1948, in to_sql
+    table = self.prep_table(
+            ^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1852, in prep_table
+    table.create()
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 936, in create
+    self._execute_create()
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 922, in _execute_create
+    self.table.create(bind=self.pd_sql.con)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/schema.py", line 962, in create
+    bind._run_ddl_visitor(ddl.SchemaGenerator, self, checkfirst=checkfirst)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2221, in _run_ddl_visitor
+    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/visitors.py", line 524, in traverse_single
+    return meth(obj, **kw)
+           ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/ddl.py", line 899, in visit_table
+    self.connection.execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/ddl.py", line 80, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1477, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidSchemaName) schema "public" does not exist
+LINE 2: CREATE TABLE public.global_food_delivery_enriched_market_202...
+                     ^
+
+[SQL: 
+CREATE TABLE public.global_food_delivery_enriched_market_2026 (
+	order_id TEXT, 
+	metro_city TEXT, 
+	cuisine_category TEXT, 
+	order_channel TEXT, 
+	order_value_usd FLOAT(53), 
+	discount_applied_usd FLOAT(53), 
+	delivery_distance_km FLOAT(53), 
+	estimated_prep_time_min BIGINT, 
+	actual_delivery_time_min FLOAT(53), 
+	delivery_fee_usd FLOAT(53), 
+	customer_rating FLOAT(53), 
+	restaurant_price_tier TEXT, 
+	is_peak_hour BOOLEAN, 
+	weather_condition TEXT, 
+	net_effective_order_price FLOAT(53), 
+	discount_percentage FLOAT(53), 
+	delivery_speed_km_per_hr FLOAT(53), 
+	total_fulfillment_time_min FLOAT(53), 
+	delivery_fee_ratio FLOAT(53), 
+	customer_spending_tier TEXT, 
+	logistics_friction_index FLOAT(53), 
+	estimated_restaurant_net_margin_usd FLOAT(53), 
+	customer_satisfaction_tier TEXT, 
+	primary_satisfaction_driver TEXT, 
+	cot_market_dynamics_rationale TEXT, 
+	confidence_score FLOAT(53)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2026-11-15T19:12:42.771+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=import_files_to_postgres, task_id=load_to_postgres, run_id=manual__2026-11-15T19:12:40.360998+00:00, map_index=0, execution_date=20261115T191240, start_date=20261115T191242, end_date=20261115T191242
+[2026-11-15T19:12:42.781+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 55 for task load_to_postgres ((psycopg2.errors.InvalidSchemaName) schema "public" does not exist
+LINE 2: CREATE TABLE public.global_food_delivery_enriched_market_202...
+                     ^
+
+[SQL: 
+CREATE TABLE public.global_food_delivery_enriched_market_2026 (
+	order_id TEXT, 
+	metro_city TEXT, 
+	cuisine_category TEXT, 
+	order_channel TEXT, 
+	order_value_usd FLOAT(53), 
+	discount_applied_usd FLOAT(53), 
+	delivery_distance_km FLOAT(53), 
+	estimated_prep_time_min BIGINT, 
+	actual_delivery_time_min FLOAT(53), 
+	delivery_fee_usd FLOAT(53), 
+	customer_rating FLOAT(53), 
+	restaurant_price_tier TEXT, 
+	is_peak_hour BOOLEAN, 
+	weather_condition TEXT, 
+	net_effective_order_price FLOAT(53), 
+	discount_percentage FLOAT(53), 
+	delivery_speed_km_per_hr FLOAT(53), 
+	total_fulfillment_time_min FLOAT(53), 
+	delivery_fee_ratio FLOAT(53), 
+	customer_spending_tier TEXT, 
+	logistics_friction_index FLOAT(53), 
+	estimated_restaurant_net_margin_usd FLOAT(53), 
+	customer_satisfaction_tier TEXT, 
+	primary_satisfaction_driver TEXT, 
+	cot_market_dynamics_rationale TEXT, 
+	confidence_score FLOAT(53)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/f405); 227)
+[2026-11-15T19:12:42.805+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-11-15T19:12:42.817+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-11-15T19:12:42.819+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

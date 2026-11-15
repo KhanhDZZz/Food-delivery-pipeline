@@ -1,0 +1,19 @@
+[2026-11-15T18:55:28.391+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-11-15T18:55:28.418+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: import_csv_xlsx_to_postgres.get_file_list manual__2026-11-15T18:55:27.110152+00:00 [queued]>
+[2026-11-15T18:55:28.427+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: import_csv_xlsx_to_postgres.get_file_list manual__2026-11-15T18:55:27.110152+00:00 [queued]>
+[2026-11-15T18:55:28.428+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-11-15T18:55:28.438+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): get_file_list> on 2026-11-15 18:55:27.110152+00:00
+[2026-11-15T18:55:28.445+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'import_csv_xlsx_to_postgres', 'get_file_list', 'manual__2026-11-15T18:55:27.110152+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/import_data_to_postgres.py', '--cfg-path', '/tmp/tmp456n071p']
+[2026-11-15T18:55:28.447+0000] {standard_task_runner.py:91} INFO - Job 12: Subtask get_file_list
+[2026-11-15T18:55:28.449+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=198) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-11-15T18:55:28.450+0000] {standard_task_runner.py:63} INFO - Started process 200 to run task
+[2026-11-15T18:55:28.489+0000] {task_command.py:426} INFO - Running <TaskInstance: import_csv_xlsx_to_postgres.get_file_list manual__2026-11-15T18:55:27.110152+00:00 [running]> on host 4fa7fda58cb3
+[2026-11-15T18:55:28.706+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='import_csv_xlsx_to_postgres' AIRFLOW_CTX_TASK_ID='get_file_list' AIRFLOW_CTX_EXECUTION_DATE='2026-11-15T18:55:27.110152+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-11-15T18:55:27.110152+00:00'
+[2026-11-15T18:55:28.707+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-11-15T18:55:28.713+0000] {logging_mixin.py:188} INFO - Tìm thấy: ['/opt/***/data/global_food_delivery_enriched_market_2026.csv']
+[2026-11-15T18:55:28.714+0000] {python.py:237} INFO - Done. Returned value was: ['/opt/***/data/global_food_delivery_enriched_market_2026.csv']
+[2026-11-15T18:55:28.715+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-11-15T18:55:28.734+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=import_csv_xlsx_to_postgres, task_id=get_file_list, run_id=manual__2026-11-15T18:55:27.110152+00:00, execution_date=20261115T185527, start_date=20261115T185528, end_date=20261115T185528
+[2026-11-15T18:55:28.785+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-11-15T18:55:28.825+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-11-15T18:55:28.827+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

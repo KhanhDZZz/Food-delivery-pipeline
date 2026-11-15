@@ -1,0 +1,19 @@
+[2026-11-15T20:01:38.745+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-11-15T20:01:38.792+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_pipeline_for_food_delivery_orders.gold.dimensions.build_dim_city manual__2026-11-15T20:01:25.688079+00:00 [queued]>
+[2026-11-15T20:01:38.803+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_pipeline_for_food_delivery_orders.gold.dimensions.build_dim_city manual__2026-11-15T20:01:25.688079+00:00 [queued]>
+[2026-11-15T20:01:38.804+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-11-15T20:01:38.817+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): gold.dimensions.build_dim_city> on 2026-11-15 20:01:25.688079+00:00
+[2026-11-15T20:01:38.826+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'data_pipeline_for_food_delivery_orders', 'gold.dimensions.build_dim_city', 'manual__2026-11-15T20:01:25.688079+00:00', '--job-id', '85', '--raw', '--subdir', 'DAGS_FOLDER/Food delivery pipeline.py', '--cfg-path', '/tmp/tmpb4j56nlv']
+[2026-11-15T20:01:38.829+0000] {standard_task_runner.py:91} INFO - Job 85: Subtask gold.dimensions.build_dim_city
+[2026-11-15T20:01:38.832+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=870) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-11-15T20:01:38.833+0000] {standard_task_runner.py:63} INFO - Started process 890 to run task
+[2026-11-15T20:01:38.886+0000] {task_command.py:426} INFO - Running <TaskInstance: data_pipeline_for_food_delivery_orders.gold.dimensions.build_dim_city manual__2026-11-15T20:01:25.688079+00:00 [running]> on host 78cc8078d53a
+[2026-11-15T20:01:39.254+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_engineering' AIRFLOW_CTX_DAG_ID='data_pipeline_for_food_delivery_orders' AIRFLOW_CTX_TASK_ID='gold.dimensions.build_dim_city' AIRFLOW_CTX_EXECUTION_DATE='2026-11-15T20:01:25.688079+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-11-15T20:01:25.688079+00:00'
+[2026-11-15T20:01:39.256+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-11-15T20:01:39.444+0000] {logging_mixin.py:188} INFO - dim_city: 12 dòng
+[2026-11-15T20:01:39.445+0000] {python.py:237} INFO - Done. Returned value was: {'table': 'dim_city', 'rows': 12}
+[2026-11-15T20:01:39.446+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-11-15T20:01:39.472+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=data_pipeline_for_food_delivery_orders, task_id=gold.dimensions.build_dim_city, run_id=manual__2026-11-15T20:01:25.688079+00:00, execution_date=20261115T200125, start_date=20261115T200138, end_date=20261115T200139
+[2026-11-15T20:01:39.530+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-11-15T20:01:39.552+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-11-15T20:01:39.555+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

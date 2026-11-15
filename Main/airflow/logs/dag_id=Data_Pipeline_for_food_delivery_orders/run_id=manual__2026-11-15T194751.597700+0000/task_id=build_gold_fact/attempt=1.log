@@ -1,0 +1,19 @@
+[2026-11-15T19:48:01.592+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-11-15T19:48:01.620+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Data_Pipeline_for_food_delivery_orders.build_gold_fact manual__2026-11-15T19:47:51.597700+00:00 [queued]>
+[2026-11-15T19:48:01.627+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Data_Pipeline_for_food_delivery_orders.build_gold_fact manual__2026-11-15T19:47:51.597700+00:00 [queued]>
+[2026-11-15T19:48:01.628+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-11-15T19:48:01.638+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): build_gold_fact> on 2026-11-15 19:47:51.597700+00:00
+[2026-11-15T19:48:01.645+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Data_Pipeline_for_food_delivery_orders', 'build_gold_fact', 'manual__2026-11-15T19:47:51.597700+00:00', '--job-id', '71', '--raw', '--subdir', 'DAGS_FOLDER/Bronze_data.py', '--cfg-path', '/tmp/tmpz6ybe09x']
+[2026-11-15T19:48:01.647+0000] {standard_task_runner.py:91} INFO - Job 71: Subtask build_gold_fact
+[2026-11-15T19:48:01.648+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=540) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-11-15T19:48:01.649+0000] {standard_task_runner.py:63} INFO - Started process 542 to run task
+[2026-11-15T19:48:01.692+0000] {task_command.py:426} INFO - Running <TaskInstance: Data_Pipeline_for_food_delivery_orders.build_gold_fact manual__2026-11-15T19:47:51.597700+00:00 [running]> on host 78cc8078d53a
+[2026-11-15T19:48:01.891+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Data_Pipeline_for_food_delivery_orders' AIRFLOW_CTX_TASK_ID='build_gold_fact' AIRFLOW_CTX_EXECUTION_DATE='2026-11-15T19:47:51.597700+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-11-15T19:47:51.597700+00:00'
+[2026-11-15T19:48:01.892+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-11-15T19:48:02.133+0000] {logging_mixin.py:188} INFO - Fact xong: {'table': 'fact_delivery_orders', 'rows': 8000}
+[2026-11-15T19:48:02.134+0000] {python.py:237} INFO - Done. Returned value was: {'table': 'fact_delivery_orders', 'rows': 8000}
+[2026-11-15T19:48:02.135+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-11-15T19:48:02.155+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=Data_Pipeline_for_food_delivery_orders, task_id=build_gold_fact, run_id=manual__2026-11-15T19:47:51.597700+00:00, execution_date=20261115T194751, start_date=20261115T194801, end_date=20261115T194802
+[2026-11-15T19:48:02.185+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-11-15T19:48:02.200+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-11-15T19:48:02.202+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

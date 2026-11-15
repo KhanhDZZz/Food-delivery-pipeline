@@ -1,0 +1,36 @@
+[2026-11-15T20:01:45.818+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-11-15T20:01:45.845+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_pipeline_for_food_delivery_orders.pipeline_summary manual__2026-11-15T20:01:25.688079+00:00 [queued]>
+[2026-11-15T20:01:45.854+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_pipeline_for_food_delivery_orders.pipeline_summary manual__2026-11-15T20:01:25.688079+00:00 [queued]>
+[2026-11-15T20:01:45.855+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-11-15T20:01:45.865+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): pipeline_summary> on 2026-11-15 20:01:25.688079+00:00
+[2026-11-15T20:01:45.872+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'data_pipeline_for_food_delivery_orders', 'pipeline_summary', 'manual__2026-11-15T20:01:25.688079+00:00', '--job-id', '94', '--raw', '--subdir', 'DAGS_FOLDER/Food delivery pipeline.py', '--cfg-path', '/tmp/tmplhjbleh2']
+[2026-11-15T20:01:45.874+0000] {standard_task_runner.py:91} INFO - Job 94: Subtask pipeline_summary
+[2026-11-15T20:01:45.876+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=921) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-11-15T20:01:45.877+0000] {standard_task_runner.py:63} INFO - Started process 923 to run task
+[2026-11-15T20:01:45.911+0000] {task_command.py:426} INFO - Running <TaskInstance: data_pipeline_for_food_delivery_orders.pipeline_summary manual__2026-11-15T20:01:25.688079+00:00 [running]> on host 78cc8078d53a
+[2026-11-15T20:01:46.091+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_engineering' AIRFLOW_CTX_DAG_ID='data_pipeline_for_food_delivery_orders' AIRFLOW_CTX_TASK_ID='pipeline_summary' AIRFLOW_CTX_EXECUTION_DATE='2026-11-15T20:01:25.688079+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-11-15T20:01:25.688079+00:00'
+[2026-11-15T20:01:46.093+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-11-15T20:01:46.190+0000] {logging_mixin.py:188} INFO - ================================================================
+[2026-11-15T20:01:46.191+0000] {logging_mixin.py:188} INFO - bronze_global_food_delivery_enriched_market_2026 |      8,000
+[2026-11-15T20:01:46.192+0000] {logging_mixin.py:188} INFO - silver_fact_orders                               |      8,000
+[2026-11-15T20:01:46.192+0000] {logging_mixin.py:188} INFO - fact_delivery_orders                             |      8,000
+[2026-11-15T20:01:46.193+0000] {logging_mixin.py:188} INFO - dim_city                                         |         12
+[2026-11-15T20:01:46.194+0000] {logging_mixin.py:188} INFO - dim_cuisine                                      |          7
+[2026-11-15T20:01:46.194+0000] {logging_mixin.py:188} INFO - dim_order_channel                                |          3
+[2026-11-15T20:01:46.195+0000] {logging_mixin.py:188} INFO - dim_restaurant_tier                              |          3
+[2026-11-15T20:01:46.196+0000] {logging_mixin.py:188} INFO - dim_weather                                      |          4
+[2026-11-15T20:01:46.196+0000] {logging_mixin.py:188} INFO - dim_customer_tier                                |          4
+[2026-11-15T20:01:46.197+0000] {logging_mixin.py:188} INFO - dim_satisfaction                                 |         20
+[2026-11-15T20:01:46.198+0000] {logging_mixin.py:188} INFO - mart_city_performance                            |         12
+[2026-11-15T20:01:46.198+0000] {logging_mixin.py:188} INFO - mart_cuisine_performance                         |          7
+[2026-11-15T20:01:46.199+0000] {logging_mixin.py:188} INFO - mart_channel_performance                         |          3
+[2026-11-15T20:01:46.199+0000] {logging_mixin.py:188} INFO - mart_city_cuisine                                |         84
+[2026-11-15T20:01:46.200+0000] {logging_mixin.py:188} INFO - mart_operations_peak_weather                     |          8
+[2026-11-15T20:01:46.200+0000] {logging_mixin.py:188} INFO - mart_customer_satisfaction                       |         68
+[2026-11-15T20:01:46.201+0000] {logging_mixin.py:188} INFO - ================================================================
+[2026-11-15T20:01:46.202+0000] {python.py:237} INFO - Done. Returned value was: {'bronze_global_food_delivery_enriched_market_2026': 8000, 'silver_fact_orders': 8000, 'fact_delivery_orders': 8000, 'dim_city': 12, 'dim_cuisine': 7, 'dim_order_channel': 3, 'dim_restaurant_tier': 3, 'dim_weather': 4, 'dim_customer_tier': 4, 'dim_satisfaction': 20, 'mart_city_performance': 12, 'mart_cuisine_performance': 7, 'mart_channel_performance': 3, 'mart_city_cuisine': 84, 'mart_operations_peak_weather': 8, 'mart_customer_satisfaction': 68}
+[2026-11-15T20:01:46.202+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-11-15T20:01:46.245+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=data_pipeline_for_food_delivery_orders, task_id=pipeline_summary, run_id=manual__2026-11-15T20:01:25.688079+00:00, execution_date=20261115T200125, start_date=20261115T200145, end_date=20261115T200146
+[2026-11-15T20:01:46.292+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-11-15T20:01:46.305+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-11-15T20:01:46.307+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

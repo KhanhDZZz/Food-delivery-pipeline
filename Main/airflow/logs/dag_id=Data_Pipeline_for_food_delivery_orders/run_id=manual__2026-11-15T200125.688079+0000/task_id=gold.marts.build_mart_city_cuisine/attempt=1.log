@@ -1,0 +1,19 @@
+[2026-11-15T20:01:42.624+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-11-15T20:01:42.655+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_pipeline_for_food_delivery_orders.gold.marts.build_mart_city_cuisine manual__2026-11-15T20:01:25.688079+00:00 [queued]>
+[2026-11-15T20:01:42.664+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_pipeline_for_food_delivery_orders.gold.marts.build_mart_city_cuisine manual__2026-11-15T20:01:25.688079+00:00 [queued]>
+[2026-11-15T20:01:42.665+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-11-15T20:01:42.676+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): gold.marts.build_mart_city_cuisine> on 2026-11-15 20:01:25.688079+00:00
+[2026-11-15T20:01:42.684+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'data_pipeline_for_food_delivery_orders', 'gold.marts.build_mart_city_cuisine', 'manual__2026-11-15T20:01:25.688079+00:00', '--job-id', '88', '--raw', '--subdir', 'DAGS_FOLDER/Food delivery pipeline.py', '--cfg-path', '/tmp/tmpvbtjn6em']
+[2026-11-15T20:01:42.687+0000] {standard_task_runner.py:91} INFO - Job 88: Subtask gold.marts.build_mart_city_cuisine
+[2026-11-15T20:01:42.688+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=898) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-11-15T20:01:42.689+0000] {standard_task_runner.py:63} INFO - Started process 906 to run task
+[2026-11-15T20:01:42.743+0000] {task_command.py:426} INFO - Running <TaskInstance: data_pipeline_for_food_delivery_orders.gold.marts.build_mart_city_cuisine manual__2026-11-15T20:01:25.688079+00:00 [running]> on host 78cc8078d53a
+[2026-11-15T20:01:43.022+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_engineering' AIRFLOW_CTX_DAG_ID='data_pipeline_for_food_delivery_orders' AIRFLOW_CTX_TASK_ID='gold.marts.build_mart_city_cuisine' AIRFLOW_CTX_EXECUTION_DATE='2026-11-15T20:01:25.688079+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-11-15T20:01:25.688079+00:00'
+[2026-11-15T20:01:43.023+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-11-15T20:01:43.204+0000] {logging_mixin.py:188} INFO - mart_city_cuisine: 84 dòng
+[2026-11-15T20:01:43.206+0000] {python.py:237} INFO - Done. Returned value was: {'table': 'mart_city_cuisine', 'rows': 84}
+[2026-11-15T20:01:43.207+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-11-15T20:01:43.232+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=data_pipeline_for_food_delivery_orders, task_id=gold.marts.build_mart_city_cuisine, run_id=manual__2026-11-15T20:01:25.688079+00:00, execution_date=20261115T200125, start_date=20261115T200142, end_date=20261115T200143
+[2026-11-15T20:01:43.265+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-11-15T20:01:43.283+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-11-15T20:01:43.285+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
